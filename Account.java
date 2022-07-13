@@ -1,46 +1,47 @@
 import AccountType.Account_type;
-import expections.InSufficientBalance;
-import expections.miniBalanceExpection;
+import exceptions.InSufficientBalance;
+import exceptions.miniBalanceExcepction;
+
 
 import java.math.BigDecimal;
 
 abstract class Account implements bankAccount{
   private String ownerName;
   private BigDecimal balance;
-  private Account_type account_type;
+  private  Account_type account_type;
 
   private BigDecimal miniBalance = new BigDecimal(0);
 
 
 
   private BigDecimal overDraftLimit = new BigDecimal(0);
-  Account(String ownerName ,  BigDecimal balance , Account_type account_type) throws miniBalanceExpection {
+  Account(String ownerName ,  BigDecimal balance , Account_type account_type) throws miniBalanceExcepction{
     this.ownerName=ownerName;
     try{
       if(balance.compareTo(miniBalance)>=0){
         this.balance = balance;
       }
       else {
-        throw new miniBalanceExpection("Minimum Balance Required ");
+        throw new miniBalanceExcepction("Minimum Balance Required ");
       }
-    } catch (miniBalanceExpection e) {
+    } catch (miniBalanceExcepction e) {
          e.getMessage();
-        throw new miniBalanceExpection("Minimum Balance Required ");
+        throw new miniBalanceExcepction("Minimum Balance Required ");
     }
     this.account_type = account_type;
+
+  }
+ void  print_details(){
     System.out.println("owner Name: "+ownerName);
     System.out.println("Current Balance :"+balance);
     System.out.println("Account Type: "+account_type);
   }
-// void  getOwner_name(){
-//      System.out.println("Owner Name: "+ownerName);
-//      System.out.println("Current Balance: "+balance);
-//  }
   //Deposit Function
   @Override
-  public void deposit(BigDecimal amount){
+  public BigDecimal deposit(BigDecimal amount){
     this.balance = this.balance.add(amount);
 
+    return balance;
   }
 
 
@@ -54,7 +55,7 @@ abstract class Account implements bankAccount{
         throw new InSufficientBalance("Insufficient Balance in your Account");
       }
     }catch (InSufficientBalance e ){
-      e.getMessage();
+      //System.out.println(e.getMessage());
       throw new InSufficientBalance("Insufficient Balance in your Account");
     }
   }
