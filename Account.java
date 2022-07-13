@@ -10,8 +10,11 @@ abstract class Account implements bankAccount{
   private Account_type account_type;
 
   private BigDecimal miniBalance = new BigDecimal(0);
+
+
+
   private BigDecimal overDraftLimit = new BigDecimal(0);
-  Account(String ownerName ,  BigDecimal balance , BigDecimal miniBalance , Account_type account_type) throws miniBalanceExpection {
+  Account(String ownerName ,  BigDecimal balance , Account_type account_type) throws miniBalanceExpection {
     this.ownerName=ownerName;
     try{
       if(balance.compareTo(miniBalance)>=0){
@@ -82,14 +85,22 @@ abstract class Account implements bankAccount{
   public void setBalance(BigDecimal balance) {
     this.balance = balance;
   }
+  //get method for mini-balance
   public BigDecimal getMiniBalance() {
     return miniBalance;
   }
-
+  // set method for mini-balance
   public void setMiniBalance(BigDecimal miniBalance) {
     this.miniBalance = miniBalance;
   }
-
+  //get method for over-Draft-limit
+  public BigDecimal getOverDraftLimit() {
+    return overDraftLimit;
+  }
+  //set method for over-Draft-limit
+  public void setOverDraftLimit(BigDecimal overDraftLimit) {
+    this.overDraftLimit = overDraftLimit;
+  }
 
 
 }

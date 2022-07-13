@@ -6,9 +6,10 @@ import java.math.BigDecimal;
 
 public class HDFC_BANK extends Account implements bankAccount{
 
-    public HDFC_BANK(String ownerName, BigDecimal balance, BigDecimal miniBalance , Account_type account_type) throws miniBalanceExpection {
-        super(ownerName, balance, miniBalance,account_type);
+    public HDFC_BANK(String ownerName, BigDecimal balance, Account_type account_type) throws miniBalanceExpection {
+        super(ownerName, balance,account_type);
         super.setMiniBalance(BigDecimal.valueOf(5000));
+        super.setOverDraftLimit(BigDecimal.valueOf(0.40));
     }
 
 
@@ -16,13 +17,13 @@ public class HDFC_BANK extends Account implements bankAccount{
     public void withdraw(BigDecimal amount) throws InSufficientBalance {
         super.withdraw(amount);
         System.out.println("Withdraw from HDFC Bank");
-        System.out.println("Withdraw Amount: "+this.getBalance()+"Rs");
+        System.out.println("After Withdraw Total Amount in Your HDFC Bank : "+this.getBalance()+"Rs");
     }
 
     @Override
     public void deposit(BigDecimal amount) {
         super.deposit(amount);
-        System.out.println("deposit to HDFC Bank");
-        System.out.println("Deposit Amount: "+this.getBalance()+"Rs");
+        System.out.println("Deposit to HDFC Bank");
+        System.out.println("After deposit Total Amount in Your HDFC Bank : "+this.getBalance()+"Rs");
     }
 }
